@@ -44,6 +44,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('Map!', gMap);
 
             map.addListener("click", (mapsMouseEvent) => {
+                console.log('i am clicking on the map');
                 // Close the current InfoWindow.
                 infoWindow.close();
 
