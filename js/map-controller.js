@@ -13,7 +13,7 @@ const API_KEY_2 = '4b5737ce0e7b5f0d875e11f36d6c4f5f'
 console.log('Main!');
 
 mapService.getLocs()
-    // .then(locs => console.log('locs', locs))
+// .then(locs => console.log('locs', locs))
 
 window.onload = () => {
 
@@ -50,9 +50,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('google available');
             gMap = new google.maps.Map(
                 document.querySelector('#map'), {
-                    center: { lat, lng },
-                    zoom: 15
-                })
+                center: { lat, lng },
+                zoom: 15
+            })
             console.log('Map!', gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
@@ -67,6 +67,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     .then((res) => {
                         (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"]));
                         locObj = {
+                            id: makeId(),
                             addressName: res["results"][0]["formatted_address"],
                             coords: mapsMouseEvent.latLng.toJSON()
                         };
@@ -128,7 +129,7 @@ function onSearch() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-        // const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw';
+    // const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
@@ -153,7 +154,14 @@ function saveLocation(locObj) {
     addressesService.addPlace(locObj);
 
     const locsList = document.querySelector('.loations-list');
-    locsList.innerHTML += `<li>${locObj.addressName}<button onclick="panTo(${locObj.coords.lat},${locObj.coords.lng})">🎯</button></li>`
+    locsList.innerHTML += `<li class="saved-loc saved-loc-${locObj.id}">${locObj.addressName}<button class="btn-${locObj.id}">🎯</button><button class="delete-btn-${locObj.id}">X</button></li>`
+    document.querySelector(`.btn-${locObj.id}`).addEventListener('click', () => {
+        panTo(locObj.coords.lat, locObj.coords.lng)
+        addMarker({ lat: locObj.coords.lat, lng: locObj.coords.lng })
+    })
+    document.querySelector(`.delete-btn-${locObj.id}`).addEventListener('click', () => {
+        document.querySelector(`.saved-loc-${locObj.id}`).remove()
+    })
 }
 
 function renderSavedLocations() {
@@ -170,3 +178,14 @@ function renderSavedLocations() {
 //     center: myLatlng,
 // });
 // Create the initial InfoWindow.
+
+function makeId(length = 12) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return txt;
+}
