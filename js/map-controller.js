@@ -61,7 +61,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 );
                 infoWindow.open(gMap);
                 // console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
-                addMarker(mapsMouseEvent.latLng)
+                addMarker(mapsMouseEvent.latLng.toJSON())
             });
             // 
             document.querySelector('search-loc').addEventListener('click', onSearch)
