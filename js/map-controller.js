@@ -67,6 +67,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     .then((res) => {
                         (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"]));
                         locObj = {
+                            id: makeId(),
                             addressName: res["results"][0]["formatted_address"],
                             coords: mapsMouseEvent.latLng.toJSON()
                         };
@@ -151,15 +152,41 @@ function saveLocation(locObj) {
     addressesService.addPlace(locObj);
     console.log(locObj.coords);
 
-    const locsList = document.querySelector('.loations-list');
-    locsList.innerHTML += `<li class="saved-loc">${locObj.addressName}<button onclick="panTo(${locObj.coords.lat},${locObj.coords.lng})">🎯</button></li>`
+    const locsList = document.querySelector('.locations-list');
+    locsList.innerHTML += `<li class="saved-loc saved-loc-${locObj.id}">${locObj.addressName}<button class="btn-${locObj.id}">🎯</button><button class="delete-btn-${locObj.id}">X</button></li>`
+
+    document.querySelector(`.btn-${locObj.id}`).addEventListener('click', () => {
+        panTo(locObj.coords.lat, locObj.coords.lng)
+        addMarker({ lat: locObj.coords.lat, lng: locObj.coords.lng })
+    })
+    document.querySelector(`.delete-btn-${locObj.id}`).addEventListener('click', () => {
+        document.querySelector(`.saved-loc-${locObj.id}`).remove()
+    })
 }
 
 function renderSavedLocations() {
     const places = addressesService.getSavedPlaces();
-    console.log('places are', places);
-    const locsList = document.querySelector('.loations-list');
-    places.forEach(location => locsList.innerHTML += `<li class="saved-loc">${location.addressName}</li>`);
+    if (places.length === 0) return;
+    const locsList = document.querySelector('.locations-list');
+    places.forEach(location => {
+
+        locsList.innerHTML += `<li class="saved-loc saved-loc-${location.id}">${location.addressName}<button class="btn-${location.id}">🎯</button><button class="delete-btn-${location.id}">X</button></li>`
+
+        document.querySelector(`.btn-${location.id}`).addEventListener('click', () => {
+            panTo(location.coords.lat, location.coords.lng)
+            addMarker({ lat: location.coords.lat, lng: location.coords.lng })
+        })
+
+        document.querySelector(`.delete-btn-${location.id}`).addEventListener('click', () => {
+            let places = addressesService.getSavedPlaces();
+            console.log('places are: ', places);
+            const idx = places.findIndex(place => place.id === location.id);
+            console.log(idx);
+            places.splice(idx, 1);
+            document.querySelector(`.saved-loc-${location.id}`).remove()
+        })
+
+    });
 
 }
 
@@ -178,3 +205,14 @@ function showWeater(weather) {
 //     center: myLatlng,
 // });
 // Create the initial InfoWindow.
+
+function makeId(length = 12) {
+    var txt = '';
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    return txt;
+}
