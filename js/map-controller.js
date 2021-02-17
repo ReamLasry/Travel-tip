@@ -100,8 +100,10 @@ function getPosition() {
 }
 
 function onSearch() {
-    var searchParam = document.getElementById('enter-loc').value
-    var searchParamCoords = mapService.getLocParams(searchParam, API_KEY)
+    let searchParam = document.getElementById('enter-loc').value
+    let searchParamCoords
+    mapService.getLocParams(searchParam, API_KEY)
+    .then((res) => searchParamCoords = res)
     console.log(searchParamCoords)
 }
 
