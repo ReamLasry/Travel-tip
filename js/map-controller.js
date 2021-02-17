@@ -73,7 +73,7 @@ function addMarker(loc) {
     console.log(loc);
     mapService.getLocAddress(loc.lat, loc.lng, API_KEY)
                     .then((res) => (res.json()))
-                    .then((res) => (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["format
+                    .then((res) => (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"])))
 
     gMarker = new google.maps.Marker({
         position: loc,
