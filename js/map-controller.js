@@ -158,7 +158,9 @@ function saveLocation(locObj) {
 
 function renderSavedLocations() {
     const places = addressesService.getSavedPlaces();
+    console.log('places are', places);
     const locsList = document.querySelector('.loations-list');
+    places.forEach(location => locsList.innerHTML += `<li class="saved-loc">${location.addressName}</li>`);
 
 }
 
