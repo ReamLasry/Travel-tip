@@ -52,8 +52,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                addMarker(mapsMouseEvent.latLng.toJSON())
-                    // Close the current InfoWindow.
+                addMarker(mapsMouseEvent.latLng.toJSON());
+                // Close the current InfoWindow.
                 infoWindow.close();
                 // Create a new InfoWindow.
                 infoWindow = new google.maps.InfoWindow({
@@ -63,7 +63,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
-                // console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
             });
             // 
             document.querySelector('.search-loc').addEventListener('click', onSearch)
@@ -74,6 +73,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 
 function addMarker(loc) {
+    console.log(gMarker);
     if (gMarker) gMarker.setMap(null)
 
     gMarker = new google.maps.Marker({
