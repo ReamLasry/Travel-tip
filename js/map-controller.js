@@ -42,20 +42,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     zoom: 15
                 })
             console.log('Map!', gMap);
-
-
             // 
-            // const myLatlng = { lat: -25.363, lng: 131.044 };
-            // const map = new google.maps.Map(document.getElementById("map"), {
-            //     zoom: 4,
-            //     center: myLatlng,
+            // let infoWindow = new google.maps.InfoWindow({
+            //     content: "Click the map to get Lat/Lng!",
+            //     position: myLatlng,
             // });
-            // Create the initial InfoWindow.
-            let infoWindow = new google.maps.InfoWindow({
-                content: "Click the map to get Lat/Lng!",
-                position: myLatlng,
-            });
-            infoWindow.open(gMap);
+            // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
                 // Close the current InfoWindow.
@@ -114,3 +106,11 @@ function _connectGoogleApi() {
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
 }
+
+
+// const myLatlng = { lat: -25.363, lng: 131.044 };
+// const map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 4,
+//     center: myLatlng,
+// });
+// Create the initial InfoWindow.
