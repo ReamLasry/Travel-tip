@@ -15,16 +15,6 @@ function getLocs() {
 
 
 function getLocParams(location, key) {
-<<<<<<< HEAD
-    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location.replaceAll(' ','+')}&key=${key}`)
-        // .then(res => res.json())
-        // .then(ans => {
-        //     console.log('Service Got Ans:', ans);
-        //     // resolve(ans)
-        // })
-}
-
-=======
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location.replaceAll(' ', '+')}&key=${key}`)
     // .then(res => res.json())
     // .then(ans => {
@@ -33,11 +23,6 @@ function getLocParams(location, key) {
     // })
 }
 
-function getLocWeatherData(lat, lan, key) {
-    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lan}&appid=${key}&units=metric`)
-}
-
->>>>>>> 997f7daba8513e3f2934f469e01a8298867082d1
 function getLocAddress(lat, lng, key) {
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`)
 }
