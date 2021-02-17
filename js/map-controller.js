@@ -23,8 +23,8 @@ window.onload = () => {
         .then(pos => {
             console.log('User position is:', pos.coords);
             document.querySelector('.curr-loc-btn').addEventListener('click', () => {
-                    panTo(pos.coords.latitude, pos.coords.longitude);
-                })
+                panTo(pos.coords.latitude, pos.coords.longitude);
+            })
         })
         .catch(err => {
             console.log('err!!!', err);
@@ -60,11 +60,11 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
-                console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
-                // addMarker({})
+                // console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
+                addMarker(mapsMouseEvent.latLng)
             });
             // 
-            document.querySelector('search-loc').addEventListener('click',onSearch)
+            document.querySelector('search-loc').addEventListener('click', onSearch)
         })
 }
 
@@ -95,9 +95,9 @@ function getPosition() {
     })
 }
 
-function onSearch(){
+function onSearch() {
     var searchParam = document.getElementById('enter-loc').value
-    var searchParamCoords = getLocationCoords(searchParam,API_KEY)
+    var searchParamCoords = getLocationCoords(searchParam, API_KEY)
     console.log(searchParamCoords)
 }
 
@@ -122,4 +122,3 @@ function _connectGoogleApi() {
 //     center: myLatlng,
 // });
 // Create the initial InfoWindow.
-
