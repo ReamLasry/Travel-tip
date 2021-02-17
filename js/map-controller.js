@@ -81,7 +81,7 @@ function addMarker(loc) {
     gMarker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: 'Hello World!'
+        title: `${loc}`
     });
     return gMarker;
 }
