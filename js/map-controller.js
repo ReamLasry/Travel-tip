@@ -1,6 +1,7 @@
 import { mapService } from './services/map-service.js'
 
 var gMap;
+var gMarker;
 console.log('Main!');
 
 mapService.getLocs()
@@ -50,7 +51,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                // Close the current InfoWindow.
+                addMarker(mapsMouseEvent.latLng.toJSON())
+                    // Close the current InfoWindow.
                 infoWindow.close();
                 // Create a new InfoWindow.
                 infoWindow = new google.maps.InfoWindow({
@@ -61,7 +63,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 );
                 infoWindow.open(gMap);
                 // console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
-                addMarker(mapsMouseEvent.latLng.toJSON())
             });
             // 
             document.querySelector('.search-loc').addEventListener('click', onSearch)
@@ -72,14 +73,14 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 
 function addMarker(loc) {
-    // if (gMarker) gMarker.setMap(null)
+    if (gMarker) gMarker.setMap(null)
 
-    var marker = new google.maps.Marker({
+    gMarker = new google.maps.Marker({
         position: loc,
         map: gMap,
         title: 'Hello World!'
     });
-    return marker;
+    // return marker;
 }
 
 function panTo(lat, lng) {
