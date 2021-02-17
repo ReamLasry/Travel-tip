@@ -60,7 +60,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
-                console.log(mapsMouseEvent.latLng);
+                console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
                 // addMarker({})
             });
             // 
