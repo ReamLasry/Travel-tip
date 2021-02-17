@@ -75,7 +75,7 @@ function addMarker(loc) {
     gMarker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: `LAT: ${loc.lat}, Lan: ${loc.lng}`
+        title: `LAT: ${loc.lat}, LAN: ${loc.lng}`
     });
     return gMarker;
 }
