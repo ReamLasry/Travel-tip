@@ -83,7 +83,7 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     });
-    return marker;
+    return gMarker;
 }
 
 function panTo(lat, lng) {
