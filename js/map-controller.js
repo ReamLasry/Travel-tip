@@ -42,10 +42,30 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     zoom: 15
                 })
             console.log('Map!', gMap);
+
+            map.addListener("click", (mapsMouseEvent) => {
+                console.log('i am clicking on the map');
+                // Close the current InfoWindow.
+                infoWindow.close();
+
+                // Create a new InfoWindow.
+                infoWindow = new google.maps.InfoWindow({
+                    position: mapsMouseEvent.latLng,
+                });
+                infoWindow.setContent(
+                    JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+                );
+                infoWindow.open(map);
+            });
         })
 }
 
+
+
+
 function addMarker(loc) {
+    // if (gMarker) gMarker.setMap(null)
+
     var marker = new google.maps.Marker({
         position: loc,
         map: gMap,
