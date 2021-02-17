@@ -3,6 +3,7 @@ import { mapService } from './services/map-service.js'
 var gMap;
 var gMarker;
 const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw'
+const API_KEY_2 = '4b5737ce0e7b5f0d875e11f36d6c4f5f'
 console.log('Main!');
 
 mapService.getLocs()
@@ -48,6 +49,18 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             // 
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
+                mapService.getLocWeatherData(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY_2)
+                    .then((res) => { console.log(res.json()) })
+                    // Close the current InfoWindow.
+                infoWindow.close();
+                // Create a new InfoWindow.
+                infoWindow = new google.maps.InfoWindow({
+                    position: mapsMouseEvent.latLng,
+                });
+                infoWindow.setContent(
+                    JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+                );
+                infoWindow.open(gMap);
                 addMarker(mapsMouseEvent.latLng.toJSON());
                 showLocCoordAndOptions(lat, lng);
 
