@@ -52,7 +52,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                addMarker(mapsMouseEvent.latLng.toJSON());
                 // Close the current InfoWindow.
                 infoWindow.close();
                 // Create a new InfoWindow.
@@ -62,6 +61,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
+                addMarker(mapsMouseEvent.latLng.toJSON());
                 infoWindow.open(gMap);
             });
             // 
@@ -73,7 +73,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 
 function addMarker(loc) {
-    console.log(gMarker);
     if (gMarker) gMarker.setMap(null)
 
     gMarker = new google.maps.Marker({
@@ -81,7 +80,7 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     });
-    // return marker;
+    return marker;
 }
 
 function panTo(lat, lng) {
@@ -105,7 +104,7 @@ function onSearch() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    // const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw';
+        // const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
