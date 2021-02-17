@@ -146,7 +146,7 @@ function showSaveOption(locObj) {
 
 function saveLocation(locObj) {
     const locsList = document.querySelector('.loations-list');
-    locsList.innerHTML += `<li>${locObj.addressName}</li>`
+    locsList.innerHTML += `<li>${locObj.addressName}<button onclick="panTo(${locObj.coords.lat},${locObj.coords.lng})">🎯</button></li>`
 }
 
 
