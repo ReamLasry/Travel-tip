@@ -1,9 +1,12 @@
-import { mapService } from './services/map-service.js'
+import { mapService } from './services/map-service.js';
+import { weatherService } from './services/weather-service.js';
 
 var gMap;
 var gMarker;
+
 const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw'
 const API_KEY_2 = '4b5737ce0e7b5f0d875e11f36d6c4f5f'
+
 console.log('Main!');
 
 mapService.getLocs()
@@ -46,10 +49,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     zoom: 15
                 })
             console.log('Map!', gMap);
-            // 
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                mapService.getLocWeatherData(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY_2)
+                weatherService.getLocWeatherData(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY_2)
                     .then((res) => { return res.json() })
                     .then((res) => { console.log(res.main) })
 
@@ -59,7 +61,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 addMarker(mapsMouseEvent.latLng.toJSON());
                 showSaveOption();
             });
-            // 
             document.querySelector('.search-loc').addEventListener('click', onSearch)
         })
 }
