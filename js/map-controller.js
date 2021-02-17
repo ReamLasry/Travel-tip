@@ -64,7 +64,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.open(gMap);
             });
             // 
-            document.querySelector('search-loc').addEventListener('click', onSearch)
+            document.querySelector('.search-loc').addEventListener('click', onSearch)
         })
 }
 
@@ -98,7 +98,7 @@ function getPosition() {
 
 function onSearch() {
     var searchParam = document.getElementById('enter-loc').value
-    var searchParamCoords = getLocationCoords(searchParam, API_KEY)
+    var searchParamCoords = mapService.getLocParams(searchParam, API_KEY)
     console.log(searchParamCoords)
 }
 
