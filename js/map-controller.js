@@ -60,7 +60,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
                 weatherService.getLocWeatherData(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY_2)
                     .then((res) => { return res.json() })
-                    .then((res) => { console.log(res.main) })
+                    .then((res) => { showWeater(res.main) })
 
                 mapService.getLocAddress(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY)
                     .then((res) => (res.json()))
@@ -81,8 +81,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             document.querySelector('.search-loc').addEventListener('click', onSearch)
         })
 }
-
-
 
 
 function addMarker(loc) {
@@ -151,9 +149,10 @@ function showSaveOption(locObj) {
 
 function saveLocation(locObj) {
     addressesService.addPlace(locObj);
+    console.log(locObj.coords);
 
     const locsList = document.querySelector('.loations-list');
-    locsList.innerHTML += `<li>${locObj.addressName}<button onclick="panTo(${locObj.coords.lat},${locObj.coords.lng})">🎯</button></li>`
+    locsList.innerHTML += `<li class="saved-loc">${locObj.addressName}<button onclick="panTo(${locObj.coords.lat},${locObj.coords.lng})">🎯</button></li>`
 }
 
 function renderSavedLocations() {
@@ -162,6 +161,15 @@ function renderSavedLocations() {
     const locsList = document.querySelector('.loations-list');
     places.forEach(location => locsList.innerHTML += `<li class="saved-loc">${location.addressName}</li>`);
 
+}
+
+function showWeater(weather) {
+    document.getElementById('temp').innerHTML = `Temp:&nbsp${weather.temp}`;
+    document.getElementById('feels-like').innerHTML = `Feels like:&nbsp${weather.feels_like}`;
+    document.getElementById('temp-max').innerHTML = `Max temp:&nbsp${weather.temp_max}`;
+    document.getElementById('temp-min').innerHTML = `Min temp:&nbsp${weather.temp_min}`;
+    document.getElementById('pressure').innerHTML = `Pressure:&nbsp${weather.pressure}`;
+    document.getElementById('humidity').innerHTML = `Humidity:&nbsp${weather.humidity}`;
 }
 
 // const myLatlng = { lat: -25.363, lng: 131.044 };
