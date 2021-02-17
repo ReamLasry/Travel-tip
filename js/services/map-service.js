@@ -14,9 +14,9 @@ function getLocs() {
 
 function getLocParams(location,key) {
     return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location.replaceAll(' ','+')}&key=${key}`)
-        .then(res => res.json())
-        .then(ans => {
-            console.log('Service Got Ans:', ans);
-            resolve(ans)
-        })
+        // .then(res => res.json())
+        // .then(ans => {
+        //     console.log('Service Got Ans:', ans);
+        //     // resolve(ans)
+        // })
 }
