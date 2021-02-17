@@ -47,7 +47,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 content: "Click the map to get Lat/Lng!",
                 position: { lat, lng },
             });
-            infoWindow.open(gMap);
+            // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
                 // Close the current InfoWindow.
@@ -60,6 +60,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
+                console.log('mapsMouseEvent.latLng', mapsMouseEvent.latLng);
+                // addMarker({})
             });
             // 
             document.querySelector('search-loc').addEventListener('click',onSearch)
