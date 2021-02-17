@@ -103,8 +103,10 @@ function onSearch() {
     let searchParam = document.getElementById('enter-loc').value
     let searchParamCoords
     mapService.getLocParams(searchParam, API_KEY)
-    .then((res) => searchParamCoords = res)
-    console.log(searchParamCoords)
+    .then((res) => {
+        searchParamCoords = res
+        console.log(searchParamCoords)
+    })
 }
 
 function _connectGoogleApi() {
