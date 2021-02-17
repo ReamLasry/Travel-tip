@@ -55,9 +55,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     .then((res) => { return res.json() })
                     .then((res) => { console.log(res.main) })
 
-                mapService.getLocAddress(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY)
-                    .then((res) => (res.json()))
-                    .then((res) => (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"])))
+                // mapService.getLocAddress(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY)
+                //     .then((res) => (res.json()))
+                //     .then((res) => (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"])))
                 addMarker(mapsMouseEvent.latLng.toJSON());
                 showSaveOption();
             });
@@ -71,6 +71,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 function addMarker(loc) {
     if (gMarker) gMarker.setMap(null)
     console.log(loc);
+    mapService.getLocAddress(loc.lat, loc.lng, API_KEY)
+                    .then((res) => (res.json()))
+                    .then((res) => (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["format
 
     gMarker = new google.maps.Marker({
         position: loc,
