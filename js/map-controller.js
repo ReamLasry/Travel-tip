@@ -160,9 +160,24 @@ function renderSavedLocations() {
     // locsList.innerText = '';
 
     places.forEach(location => {
-
         locsList.innerHTML += `<li class="saved-loc saved-loc-${location.id}">${location.addressName}<button class="btn-${location.id}">🎯</button><button class="delete-btn-${location.id}">X</button></li>`
 
+        // document.querySelector(`.btn-${location.id}`).addEventListener('click', () => {
+        //     panTo(location.coords.lat, location.coords.lng)
+        //     addMarker({ lat: location.coords.lat, lng: location.coords.lng })
+        // })
+
+        // document.querySelector(`.delete-btn-${location.id}`).addEventListener('click', () => {
+        //     let places = addressesService.getSavedPlaces();
+        //     console.log('places are: ', places);
+        //     const idx = places.findIndex(place => place.id === location.id);
+        //     console.log(idx);
+        //     places.splice(idx, 1);
+        //     document.querySelector(`.saved-loc-${location.id}`).remove()
+        // })
+
+    });
+    places.forEach(location =>{
         document.querySelector(`.btn-${location.id}`).addEventListener('click', () => {
             panTo(location.coords.lat, location.coords.lng);
             addMarker({ lat: location.coords.lat, lng: location.coords.lng });
@@ -171,6 +186,7 @@ function renderSavedLocations() {
         document.querySelector(`.delete-btn-${location.id}`).addEventListener('click', () => {
             console.log('i am delete');
         })
+<<<<<<< HEAD
 
 
 
@@ -195,6 +211,9 @@ function renderSavedLocations() {
 
     });
 
+=======
+    })
+>>>>>>> d05b481cd91acaada5c1ba61cce7a637273d3d65
 }
 
 function showWeater(weather) {
