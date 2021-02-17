@@ -8,10 +8,10 @@ mapService.getLocs()
 
 window.onload = () => {
 
-    document.querySelector('.curr-loc-btn').addEventListener('click', (ev) => {
-        console.log('Aha!', ev.target);
-        panTo(35.6895, 139.6917);
-    })
+    // document.querySelector('.curr-loc-btn').addEventListener('click', (ev) => {
+    //     console.log('Aha!', ev.target);
+    //     panTo(35.6895, 139.6917);
+    // })
 
     initMap()
         .then(() => {
@@ -22,6 +22,9 @@ window.onload = () => {
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords);
+            document.querySelector('.curr-loc-btn').addEventListener('click', (ev) => {
+                    panTo(pos.coords.latitude, pos.coords.longitude);
+                })
         })
         .catch(err => {
             console.log('err!!!', err);
