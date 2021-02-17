@@ -57,6 +57,7 @@ h1 {
 
 .weather-locs {
     margin-right: 5%;
+    height: 420px !important;
 }
 
 .weather {

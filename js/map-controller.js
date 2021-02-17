@@ -150,41 +150,48 @@ function showSaveOption(locObj) {
 
 function saveLocation(locObj) {
     addressesService.addPlace(locObj);
-    console.log(locObj.coords);
-
-    const locsList = document.querySelector('.locations-list');
-    locsList.innerHTML += `<li class="saved-loc saved-loc-${locObj.id}">${locObj.addressName}<button class="btn-${locObj.id}">🎯</button><button class="delete-btn-${locObj.id}">X</button></li>`
-
-    document.querySelector(`.btn-${locObj.id}`).addEventListener('click', () => {
-        panTo(locObj.coords.lat, locObj.coords.lng)
-        addMarker({ lat: locObj.coords.lat, lng: locObj.coords.lng })
-    })
-    document.querySelector(`.delete-btn-${locObj.id}`).addEventListener('click', () => {
-        document.querySelector(`.saved-loc-${locObj.id}`).remove()
-    })
+    renderSavedLocations();
 }
 
 function renderSavedLocations() {
     const places = addressesService.getSavedPlaces();
     if (places.length === 0) return;
     const locsList = document.querySelector('.locations-list');
+    // locsList.innerText = '';
+
     places.forEach(location => {
 
         locsList.innerHTML += `<li class="saved-loc saved-loc-${location.id}">${location.addressName}<button class="btn-${location.id}">🎯</button><button class="delete-btn-${location.id}">X</button></li>`
 
         document.querySelector(`.btn-${location.id}`).addEventListener('click', () => {
-            panTo(location.coords.lat, location.coords.lng)
-            addMarker({ lat: location.coords.lat, lng: location.coords.lng })
+            panTo(location.coords.lat, location.coords.lng);
+            addMarker({ lat: location.coords.lat, lng: location.coords.lng });
         })
 
         document.querySelector(`.delete-btn-${location.id}`).addEventListener('click', () => {
-            let places = addressesService.getSavedPlaces();
-            console.log('places are: ', places);
-            const idx = places.findIndex(place => place.id === location.id);
-            console.log(idx);
-            places.splice(idx, 1);
-            document.querySelector(`.saved-loc-${location.id}`).remove()
+            console.log('i am delete');
         })
+
+
+
+
+
+
+        // document.querySelector(`.btn-${location.id}`).addEventListener('click', () => {
+        //     panTo(location.coords.lat, location.coords.lng)
+        //     addMarker({ lat: location.coords.lat, lng: location.coords.lng })
+        // })
+
+        // document.querySelector(`.delete-btn-${location.id}`).addEventListener('click', () => {
+        //     console.log(`i am here`);
+        //     let places = addressesService.getSavedPlaces();
+        //     const idx = places.findIndex(place => place.id === location.id);
+        //     places.splice(idx, 1);
+        //     addressesService.updatePlaces()
+        //     console.log('places are: ', places);
+        //     // renderSavedLocations();
+        //     // document.querySelector(`.saved-loc-${location.id}`).remove()
+        // })
 
     });
 

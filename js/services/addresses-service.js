@@ -1,6 +1,7 @@
 export const addressesService = {
     addPlace,
-    getSavedPlaces
+    getSavedPlaces,
+    updatePlaces
 };
 import { storageServices } from './storage-service.js';
 
@@ -18,4 +19,9 @@ function getSavedPlaces() {
     gPlaces = storageServices.loadFromStorage(PLACESKEY);
     if (!gPlaces) gPlaces = [];
     return gPlaces;
+}
+
+function updatePlaces() {
+    storageServices.saveToStorage(PLACESKEY, gPlaces);
+    console.log(gPlaces);
 }
