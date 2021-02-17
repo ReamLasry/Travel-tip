@@ -10,6 +10,21 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    /* margin: 0; */
+}
+
+
+/* HEADER */
+
+.title {
+    flex-grow: 2;
+}
+
+.new-loc {
+    margin-right: 1%;
+}
+
 
 /* HELPERS */
 
