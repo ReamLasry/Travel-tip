@@ -1,5 +1,8 @@
+/* GENERAL */
+
 * {
     box-sizing: border-box;
+    outline: 1px solid black;
 }
 
 body {
@@ -8,10 +11,6 @@ body {
 
 h1 {
     margin: 0;
-}
-
-h2 {
-    /* margin: 0; */
 }
 
 
@@ -23,6 +22,28 @@ h2 {
 
 .new-loc {
     margin-right: 1%;
+}
+
+
+/* CURR-LOC */
+
+.curr-loc {
+    margin: 3% 0 3% 0;
+}
+
+.loc-name {
+    line-height: 2.5;
+}
+
+
+/* WEATHER-LOCS-MAP */
+
+.weather {
+    height: 50%;
+}
+
+.saved-locs {
+    height: 50%;
 }
 
 

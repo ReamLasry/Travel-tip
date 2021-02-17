@@ -10,6 +10,7 @@
 
 <body>
     <div class="main-container">
+        <!-- HEADER AND SEARCH -->
         <div class="header flex space-between">
             <h1 class="title">TravelTip</h1>
 
@@ -20,13 +21,29 @@
 
             <button class="curr-loc-btn">My Location</button>
         </div>
-        <!--  -->
-        <div class="curr-loc flex">
-            <h2>Location:</h2>
-            <p class="loc-name">LOCNAME</p>
+        <!-- CURR_LOCATION -->
+        <div class="curr-loc flex space-between">
+            <div class="curr-loc-name flex">
+
+                <h2>Location:</h2>
+                <p class="loc-name">&nbsp;LOCNAME</p>
+            </div>
+            <button class="copy-loc">Copy Location</button>
         </div>
+
+
         <!--  -->
-        <div id="map" style="width: 100%; height: 400px;"></div>
+        <section class="weather-locs-map flex">
+            <div class="weather-locs">
+
+                <div class="weather">WEATHER HERE</div>
+                <table class="saved-locs">SAVED LOCS HERE</table>
+            </div>
+
+            <div id="map" style="width: 100%; height: 400px;"></div>
+        </section>
+
+        <!--  -->
     </div>
 
 
