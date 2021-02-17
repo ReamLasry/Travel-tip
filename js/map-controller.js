@@ -61,8 +61,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
-                addMarker(mapsMouseEvent.latLng.toJSON());
                 infoWindow.open(gMap);
+                addMarker(mapsMouseEvent.latLng.toJSON());
             });
             // 
             document.querySelector('.search-loc').addEventListener('click', onSearch)
