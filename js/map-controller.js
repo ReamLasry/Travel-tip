@@ -94,14 +94,15 @@ function getPosition() {
 }
 
 function onSearch() {
-    let searchParam = document.getElementById('enter-loc').value
-    let searchParamCoords
+    let searchParam = document.getElementById('enter-loc').value;
+    let searchParamCoords;
     mapService.getLocParams(searchParam, API_KEY)
         .then(res => res.json())
         .then((res) => {
             searchParamCoords = res
             console.log(searchParamCoords.results[0].geometry.location)
-            panTo(searchParamCoords.results[0].geometry.location.lat, searchParamCoords.results[0].geometry.location.lng)
+            panTo(searchParamCoords.results[0].geometry.location.lat, searchParamCoords.results[0].geometry.location.lng);
+            addMarker({ lat: searchParamCoords.results[0].geometry.location.lat, lng: searchParamCoords.results[0].geometry.location.lng });
         })
 }
 
