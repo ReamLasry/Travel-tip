@@ -43,9 +43,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 })
             console.log('Map!', gMap);
             // 
-            let infoWindow = gMap.InfoWindow({
+            let infoWindow = new google.maps.InfoWindow({
                 content: "Click the map to get Lat/Lng!",
-                position: myLatlng,
+                position: { lat, lng },
             });
             infoWindow.open(gMap);
             // Configure the click listener.
