@@ -186,7 +186,6 @@ function renderSavedLocations() {
         document.querySelector(`.delete-btn-${location.id}`).addEventListener('click', () => {
             console.log('i am delete');
         })
-<<<<<<< HEAD
 
 
 
@@ -211,9 +210,6 @@ function renderSavedLocations() {
 
     });
 
-=======
-    })
->>>>>>> d05b481cd91acaada5c1ba61cce7a637273d3d65
 }
 
 function showWeater(weather) {
