@@ -48,6 +48,10 @@ h1 {
     height: 30px;
 }
 
+.save-location {
+    visibility: hidden;
+}
+
 
 /* WEATHER-LOCS-MAP */
 
@@ -65,6 +69,10 @@ h1 {
     height: 48%;
 }
 
+.loations-list {
+    margin: 5% 0;
+}
+
 
 /* HELPERS */
 
@@ -78,4 +86,9 @@ h1 {
 
 .column {
     flex-direction: column;
+}
+
+.row-rev {
+    margin-bottom: 3px;
+    flex-direction: row-reverse;
 }

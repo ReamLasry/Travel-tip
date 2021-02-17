@@ -51,15 +51,27 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             console.log('Map!', gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
+                let locObj;
+
                 weatherService.getLocWeatherData(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY_2)
                     .then((res) => { return res.json() })
                     .then((res) => { console.log(res.main) })
 
                 mapService.getLocAddress(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY)
                     .then((res) => (res.json()))
-                    .then((res) => (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"])))
+                    .then((res) => {
+                        (document.querySelector('.loc-name').innerHTML = '&nbsp;' + (res["results"][0]["formatted_address"]));
+                        locObj = {
+                            addressName: res["results"][0]["formatted_address"],
+                            coords: mapsMouseEvent.latLng.toJSON()
+                        };
+                        showSaveOption(locObj);
+                    })
                 addMarker(mapsMouseEvent.latLng.toJSON());
-                showSaveOption();
+
+
+
+
             });
             document.querySelector('.search-loc').addEventListener('click', onSearch)
         })
@@ -120,8 +132,18 @@ function _connectGoogleApi() {
     })
 }
 
-function showSaveOption() {
+function showSaveOption(locObj) {
+    const saveBTN = document.querySelector('.save-location');
+    saveBTN.style.visibility = 'unset';
 
+    saveBTN.onclick = () => {
+        saveLocation(locObj);
+    }
+}
+
+function saveLocation(locObj) {
+    const locsList = document.querySelector('.loations-list');
+    locsList.innerHTML += `<li>${locObj.addressName}</li>`
 }
 
 
