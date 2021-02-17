@@ -1,5 +1,6 @@
 import { mapService } from './services/map-service.js';
 import { weatherService } from './services/weather-service.js';
+import { addressesService } from './services/adreses-srvice.js';
 
 var gMap;
 var gMarker;
@@ -7,10 +8,12 @@ var gMarker;
 const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw'
 const API_KEY_2 = '4b5737ce0e7b5f0d875e11f36d6c4f5f'
 
+
+
 console.log('Main!');
 
 mapService.getLocs()
-    .then(locs => console.log('locs', locs))
+    // .then(locs => console.log('locs', locs))
 
 window.onload = () => {
 
@@ -36,6 +39,8 @@ window.onload = () => {
         .catch(err => {
             console.log('err!!!', err);
         })
+    renderSavedLocations();
+
 }
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -145,10 +150,17 @@ function showSaveOption(locObj) {
 }
 
 function saveLocation(locObj) {
+    addressesService.addPlace(locObj);
+
     const locsList = document.querySelector('.loations-list');
-    locsList.innerHTML += `<li>${locObj.addressName}</li>`
+    locsList.innerHTML += `<li class="saved-loc">${locObj.addressName}</li>`
 }
 
+function renderSavedLocations() {
+    const places = addressesService.getSavedPlaces();
+    const locsList = document.querySelector('.loations-list');
+
+}
 
 // const myLatlng = { lat: -25.363, lng: 131.044 };
 // const map = new google.maps.Map(document.getElementById("map"), {
