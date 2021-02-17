@@ -1,5 +1,5 @@
 export const mapService = {
-    getLocs, getLocParams
+    getLocs, getLocParams, getLocWeatherData
 }
 var locs = [{ lat: 11.22, lng: 22.11 }]
 
@@ -19,4 +19,8 @@ function getLocParams(location,key) {
         //     console.log('Service Got Ans:', ans);
         //     // resolve(ans)
         // })
+}
+
+function getLocWeatherData(lat,lan,key) {
+    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lan}&appid=${key}&units=metric`)
 }
