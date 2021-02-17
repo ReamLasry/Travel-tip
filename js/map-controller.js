@@ -96,6 +96,11 @@ function addMarker(loc) {
         map: gMap,
         title: `LAT: ${loc.lat}, LAN: ${loc.lng}`
     });
+
+    const elCopyBtn = document.querySelector('.copy-loc');
+    elCopyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(`https://reamlasry.github.io/Travel-tip/index.html?lat=${loc.lat}&lng=${loc.lng}`);
+    })
     return gMarker;
 }
 
