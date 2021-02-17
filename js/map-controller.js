@@ -56,7 +56,8 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow = new google.maps.InfoWindow({
                     position: mapsMouseEvent.latLng,
                 });
-                console.log(infoWindow);
+                console.log(infoWindow.content);
+                console.log(infoWindow.position);
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
