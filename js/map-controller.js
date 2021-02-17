@@ -1,6 +1,6 @@
 import { mapService } from './services/map-service.js';
 import { weatherService } from './services/weather-service.js';
-import { addressesService } from './services/adreses-srvice.js';
+import { addressesService } from './services/addresses-service.js';
 
 var gMap;
 var gMarker;
@@ -158,7 +158,9 @@ function saveLocation(locObj) {
 
 function renderSavedLocations() {
     const places = addressesService.getSavedPlaces();
+    console.log('places are', places);
     const locsList = document.querySelector('.loations-list');
+    places.forEach(location => locsList.innerHTML += `<li class="saved-loc">${location.addressName}</li>`);
 
 }
 
