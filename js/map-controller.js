@@ -81,7 +81,7 @@ function addMarker(loc) {
     gMarker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: `${loc}`
+        title: `${loc.toJSON()}`
     });
     return gMarker;
 }
@@ -103,7 +103,7 @@ function onSearch() {
     let searchParam = document.getElementById('enter-loc').value
     let searchParamCoords
     mapService.getLocParams(searchParam, API_KEY)
-    .then((res) => searchParamCoords = res)
+        .then((res) => searchParamCoords = res)
     console.log(searchParamCoords)
 }
 
