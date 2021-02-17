@@ -26,7 +26,9 @@ window.onload = () => {
             console.log('User position is:', pos.coords);
             document.querySelector('.curr-loc-btn').addEventListener('click', () => {
                 panTo(pos.coords.latitude, pos.coords.longitude);
-                addMarker(pos.coords.toJSON());
+                console.log(pos);
+                console.log(pos.coords);
+                // addMarker(pos.coords.toJSON());
             })
         })
         .catch(err => {
