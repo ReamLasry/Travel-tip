@@ -26,6 +26,9 @@ window.onload = () => {
             console.log('User position is:', pos.coords);
             document.querySelector('.curr-loc-btn').addEventListener('click', () => {
                 panTo(pos.coords.latitude, pos.coords.longitude);
+                console.log(pos);
+                console.log(pos.coords);
+                // addMarker(pos.coords.toJSON());
             })
         })
         .catch(err => {
@@ -52,7 +55,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                addMarker(mapsMouseEvent.latLng.toJSON());
                 // Close the current InfoWindow.
                 infoWindow.close();
                 // Create a new InfoWindow.
@@ -63,6 +65,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
                 );
                 infoWindow.open(gMap);
+                addMarker(mapsMouseEvent.latLng.toJSON());
             });
             // 
             document.querySelector('.search-loc').addEventListener('click', onSearch)
@@ -73,7 +76,6 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 
 function addMarker(loc) {
-    console.log(gMarker);
     if (gMarker) gMarker.setMap(null)
 
     gMarker = new google.maps.Marker({
@@ -81,7 +83,7 @@ function addMarker(loc) {
         map: gMap,
         title: 'Hello World!'
     });
-    // return marker;
+    return gMarker;
 }
 
 function panTo(lat, lng) {
@@ -107,7 +109,7 @@ function onSearch() {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    // const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw';
+        // const API_KEY = 'AIzaSyD5VvfHfVlus-ey6NWZRyOgsmMCSJG2Xuw';
     var elGoogleApi = document.createElement('script');
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
     elGoogleApi.async = true;
