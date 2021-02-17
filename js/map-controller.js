@@ -46,24 +46,11 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 })
             console.log('Map!', gMap);
             // 
-            let infoWindow = new google.maps.InfoWindow({
-                content: "Click the map to get Lat/Lng!",
-                position: { lat, lng },
-            });
-            // infoWindow.open(gMap);
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
-                // Close the current InfoWindow.
-                infoWindow.close();
-                // Create a new InfoWindow.
-                infoWindow = new google.maps.InfoWindow({
-                    position: mapsMouseEvent.latLng,
-                });
-                infoWindow.setContent(
-                    JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-                );
-                infoWindow.open(gMap);
                 addMarker(mapsMouseEvent.latLng.toJSON());
+                showLocCoordAndOptions(lat, lng);
+
             });
             // 
             document.querySelector('.search-loc').addEventListener('click', onSearch)
@@ -102,12 +89,12 @@ function onSearch() {
     let searchParam = document.getElementById('enter-loc').value
     let searchParamCoords
     mapService.getLocParams(searchParam, API_KEY)
-    .then(res => res.json())
-    .then((res) => {
-        searchParamCoords = res
-        console.log(searchParamCoords.results[0].geometry.location)
-        panTo(searchParamCoords.results[0].geometry.location.lat,searchParamCoords.results[0].geometry.location.lng)
-    })
+        .then(res => res.json())
+        .then((res) => {
+            searchParamCoords = res
+            console.log(searchParamCoords.results[0].geometry.location)
+            panTo(searchParamCoords.results[0].geometry.location.lat, searchParamCoords.results[0].geometry.location.lng)
+        })
 }
 
 function _connectGoogleApi() {
@@ -124,6 +111,31 @@ function _connectGoogleApi() {
     })
 }
 
+function showLocCoordAndOptions(lat, lng) {
+    let infoWindow = new google.maps.InfoWindow({
+        content: "Click the map to get Lat/Lng!",
+        position: { lat, lng },
+    });
+    // infoWindow.open(gMap);
+    // Configure the click listener.
+    gMap.addListener("click", (mapsMouseEvent) => {
+        // Close the current InfoWindow.
+        infoWindow.close();
+        // Create a new InfoWindow.
+        console.log('coord are', mapsMouseEvent.latLng.toJSON().lat);
+        console.log('coord are', mapsMouseEvent.latLng.toJSON().lng);
+
+        infoWindow = new google.maps.InfoWindow({
+            position: { lat: mapsMouseEvent.latLng.toJSON().lat + (mapsMouseEvent.latLng.toJSON().lat * 0.0009), lng: mapsMouseEvent.latLng.toJSON().lng },
+            // position: mapsMouseEvent.latLng,
+        });
+        infoWindow.setContent(
+            JSON.stringify('hello', null, 2)
+            // JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+        );
+        infoWindow.open(gMap);
+    });
+}
 
 // const myLatlng = { lat: -25.363, lng: 131.044 };
 // const map = new google.maps.Map(document.getElementById("map"), {
