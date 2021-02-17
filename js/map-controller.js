@@ -17,12 +17,12 @@ window.onload = () => {
         .then(() => {
             addMarker({ lat: 32.0749831, lng: 34.9120554 });
         })
-        .catch(() => console.log('INIT MAP ERROR'));
+        .catch((error) => console.log('INIT MAP ERROR:', error));
 
     getPosition()
         .then(pos => {
             console.log('User position is:', pos.coords);
-            document.querySelector('.curr-loc-btn').addEventListener('click', (ev) => {
+            document.querySelector('.curr-loc-btn').addEventListener('click', () => {
                     panTo(pos.coords.latitude, pos.coords.longitude);
                 })
         })
@@ -80,4 +80,10 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve;
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+function onSearch(){
+    let searchParam = document.getElementById('enter-loc').value
+    let searchParamCoords = loactionToCoords(searchParam)
+    console.log(searchParamCoords)
 }
