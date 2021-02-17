@@ -26,9 +26,7 @@ window.onload = () => {
             console.log('User position is:', pos.coords);
             document.querySelector('.curr-loc-btn').addEventListener('click', () => {
                 panTo(pos.coords.latitude, pos.coords.longitude);
-                console.log(pos);
-                console.log(pos.coords);
-                // addMarker(pos.coords.toJSON());
+                addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
             })
         })
         .catch(err => {
@@ -77,11 +75,12 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
 
 function addMarker(loc) {
     if (gMarker) gMarker.setMap(null)
+    console.log(loc);
 
     gMarker = new google.maps.Marker({
         position: loc,
         map: gMap,
-        title: `${loc.toJSON()}`
+        title: `LAT: ${loc.lat}, Lan: ${loc.lng}`
     });
     return gMarker;
 }
