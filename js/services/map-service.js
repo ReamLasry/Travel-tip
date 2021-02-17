@@ -17,5 +17,6 @@ function getLocParams(location,key) {
         .then(res => res.json())
         .then(ans => {
             console.log('Service Got Ans:', ans);
+            resolve(ans)
         })
 }
