@@ -50,17 +50,9 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             // Configure the click listener.
             gMap.addListener("click", (mapsMouseEvent) => {
                 mapService.getLocWeatherData(mapsMouseEvent.latLng.toJSON().lat, mapsMouseEvent.latLng.toJSON().lng, API_KEY_2)
-                    .then((res) => { console.log(res.json()) })
-                    // Close the current InfoWindow.
-                infoWindow.close();
-                // Create a new InfoWindow.
-                infoWindow = new google.maps.InfoWindow({
-                    position: mapsMouseEvent.latLng,
-                });
-                infoWindow.setContent(
-                    JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
-                );
-                infoWindow.open(gMap);
+                    .then((res) => { return res.json() })
+                    .then((res) => { console.log(res.main) })
+
                 addMarker(mapsMouseEvent.latLng.toJSON());
                 showLocCoordAndOptions(lat, lng);
 
