@@ -1,5 +1,5 @@
 export const mapService = {
-    getLocs , 
+    getLocs, getLocParams
 }
 var locs = [{ lat: 11.22, lng: 22.11 }]
 
@@ -12,3 +12,10 @@ function getLocs() {
 }
 
 
+function getLocParams(location,key) {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${location.replaceAll(' ','+')}&key=${key}`)
+        .then(res => res.json())
+        .then(ans => {
+            console.log('Service Got Ans:', ans);
+        })
+}

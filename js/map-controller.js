@@ -62,6 +62,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow.open(gMap);
             });
             // 
+            document.querySelector('search-loc').addEventListener('click',onSearch)
         })
 }
 
@@ -92,6 +93,11 @@ function getPosition() {
     })
 }
 
+function onSearch(){
+    var searchParam = document.getElementById('enter-loc').value
+    var searchParamCoords = getLocationCoords(searchParam,API_KEY)
+    console.log(searchParamCoords)
+}
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
@@ -114,3 +120,4 @@ function _connectGoogleApi() {
 //     center: myLatlng,
 // });
 // Create the initial InfoWindow.
+
